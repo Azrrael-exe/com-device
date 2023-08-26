@@ -1,9 +1,13 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 #include <display/display.h>
+#include <inputs/button.h>
 
-String button_1 = "Green";
-String button_2 = "White";
+String variable_1 = "Green";
+String variable_2 = "White";
+
+Button button_1 = Button(A4);
+Button button_2 = Button(A5);
 
 LiquidCrystal lcd = LiquidCrystal(8, 9, 4, 5, 6, 7); 
 
@@ -13,10 +17,10 @@ void setup() {
 }
   
 void loop() {
-    showValue(lcd, 0, button_1, 10);
-    showValue(lcd, 1, button_2, 10);
-    while (true) {
-        /* code */
-    }
-    
+    button_1.sample();
+    button_2.sample();
+    if (button_1.hasChanged() || button_2.hasChanged()) {
+        showValue(lcd, 0, variable_1, button_1.read());
+        showValue(lcd, 1, variable_2, button_2.read());
+    }    
 }
