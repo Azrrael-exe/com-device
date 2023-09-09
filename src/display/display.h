@@ -3,9 +3,9 @@
 
 #include <LiquidCrystal.h>
 
-void showValue(LiquidCrystal& lcd, uint8_t line, String var, uint8_t value) {
+void showValue(LiquidCrystal& lcd, uint8_t line, String var, uint16_t value) {
     char buffer[16];
-    sprintf(buffer, "%s: %d", var.c_str(), value);
+    sprintf(buffer, "%s: %u", var.c_str(), value);
     lcd.setCursor(0, line);
     lcd.print(buffer);
 }
